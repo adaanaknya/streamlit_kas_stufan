@@ -1,0 +1,18 @@
+credentials:
+  usernames:
+    stufan.admin:
+      email: yogyog377@gmail.com
+      name: Stufan D'corps
+      password: admin123 # To be replaced with hashed password
+cookie:
+  expiry_days: 30
+  key: random_signature_key # Must be string
+  name: random_cookie_name
+preauthorized:
+  emails:
+  - melsby@gmail.com
+
+menu:
+  welcome: "Dashboard Utama"
+  profile: "Informasi Pengguna"
+  settings: "Pengaturan"
