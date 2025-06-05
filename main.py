@@ -12,6 +12,23 @@ effective_start= creation_dates.strftime('%Y-%m-%d')
 effective_end_dates = "4712-12-31"
 effective_end_date = datetime.datetime.strptime(effective_end_dates, "%Y-%m-%d").date() 
 
+
+ 
+bulan_mapping = {
+    "Januari": "01",
+    "Februari": "02",
+    "Maret": "03",
+    "April": "04",
+    "Mei": "05",
+    "Juni": "06",
+    "Juli": "07",
+    "Agustus": "08",
+    "September": "09",
+    "Oktober": "10",
+    "November": "11",
+    "Desember": "12"
+}
+ 
 def main():
  
   st.header("Marching Band Dunia Fantasi")
@@ -38,13 +55,30 @@ def main():
     else:
          st.dataframe(pd.DataFrame(data,columns=columns),hide_index=True) 
          
-   
-        
-    
-     
   
-
         
+  with st.form(key="History"):
+      st.header("Pemasukan Pengeluran Uang Kas")
+      period = st.selectbox(
+      "Periode Bulan",
+      ("Januari", "Februari", "Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"),
+      )
+  
+      tahun = st.text_input("Tahun")
+      
+      columns = ["Nama", "Keterangan", "Harga / Nominal","Jumlah","Tanggal","Komponen","Total"]
+      submit = st.form_submit_button("Cari") 
+      if submit:
+          if period in bulan_mapping:
+              periods = bulan_mapping[period]
+              data = db.history_kas(periods,tahun)
+              if period and tahun:
+                  st.dataframe(pd.DataFrame(data,columns=columns),hide_index=True) 
+              else:
+                  st.dataframe(pd.DataFrame(data,columns=columns),hide_index=True)   
+    
+       
+      
 if __name__ == '__main__':
  
         main()
