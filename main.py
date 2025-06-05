@@ -30,7 +30,8 @@ bulan_mapping = {
 }
  
 def main():
- 
+  st.set_page_config(layout="wide")
+
   st.header("Marching Band Dunia Fantasi")
   st.image("stufan.jpg",caption="Stufan Dcorps")
 
