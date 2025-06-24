@@ -65,7 +65,7 @@ def lov_nama(sysdate):
         connection = get_connection() 
         with connection.cursor() as cursor:
             # cursor = connection.cursor()
-            cursor.execute("SELECT id_talent, nama FROM list_talent WHERE  %s between effective_start_date and effective_end_date order by nama", (sysdate,))
+            cursor.execute("SELECT id_talent, nama FROM list_talent WHERE  %s between effective_start_date and effective_end_date order by nama asc", (sysdate,))
             write = cursor.fetchall()
         connection.close() 
         return {name: id_talent for id_talent, name in write}
