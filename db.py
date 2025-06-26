@@ -65,7 +65,7 @@ def lov_nama(sysdate):
         connection = get_connection() 
         with connection.cursor() as cursor:
             # cursor = connection.cursor()
-            cursor.execute("SELECT id_talent, nama FROM list_talent WHERE  %s between effective_start_date and effective_end_date order by nama asc", (sysdate,))
+            cursor.execute("SELECT id_talent, nama FROM list_talent WHERE  %s between effective_start_date and effective_end_date order by nama", (sysdate,))
             write = cursor.fetchall()
         connection.close() 
         return {name: id_talent for id_talent, name in write}
@@ -128,7 +128,7 @@ def tagihan_period_ess(nama):
         with connection.cursor() as cursor:
             # cursor = connection.cursor()
              
-            cursor.execute("SELECT  lt.nama,lt.grade,ab.periode,year(ab.period_start) tahun ,FORMAT(sum(ab.tagihan), 0) tagihan  FROM list_talent lt,absence ab where lt.id_talent = ab.id_talent and ab.period_start between lt.effective_start_date and lt.effective_end_date  and lt.id_talent = %s   group by lt.nama,lt.grade,ab.periode,year(ab.period_start)" ,(nama,))
+            cursor.execute("SELECT  lt.nama,lt.grade,ab.periode,year(ab.period_start) tahun ,FORMAT(sum(ab.tagihan), 0) tagihan  FROM list_talent lt,absence ab where lt.id_talent = ab.id_talent and ab.period_start between lt.effective_start_date and lt.effective_end_date  and lt.id_talent = %s   group by lt.nama,lt.grade,ab.periode,year(ab.period_start) order by year(ab.period_start) , ab.periode " ,(nama,))
             
             grade = cursor.fetchall()
         
