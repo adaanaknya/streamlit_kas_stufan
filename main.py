@@ -4,6 +4,7 @@ import pandas as pd
 import datetime
 import db
  
+ 
 
 creation_dates=  datetime.datetime.now()
 creation_date_format = creation_dates.strftime('%Y%m%d%H%M%S')
@@ -30,11 +31,19 @@ bulan_mapping = {
 }
  
 def main():
+ 
   st.set_page_config(layout="wide")
 
   st.header("Marching Band Dunia Fantasi")
   st.image("stufan.jpg",caption="Stufan Dcorps")
+  st.markdown('''▫️Info Rekening Bank DKI
 
+  20723090979
+  Santika Nurkhalipah
+
+  53420012655
+  Niken Kusuma Ramda
+  ''')
   with st.form(key="cek"):
     
     st.subheader("Cek Tagihan Kas ")
@@ -77,8 +86,9 @@ def main():
                   st.dataframe(pd.DataFrame(data,columns=columns),hide_index=True) 
               else:
                   st.dataframe(pd.DataFrame(data,columns=columns),hide_index=True)   
-    
-       
+
+
+
       
 if __name__ == '__main__':
  
