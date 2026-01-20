@@ -68,7 +68,10 @@ def main():
   
         
   with st.form(key="History"):
+    
       st.header("Pemasukan Pengeluran Uang Kas")
+      cur = db.cur_amount()
+      st.write("Saldo Kas : " +str(cur))
       period = st.selectbox(
       "Periode Bulan",
       ("Januari", "Februari", "Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"),

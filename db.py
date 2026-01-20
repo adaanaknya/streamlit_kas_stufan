@@ -136,3 +136,20 @@ def tagihan_period_ess(nama):
         return grade
     except Exception as e:
         print(f"Error {e}")
+        
+def cur_amount():
+    try:
+        connection = get_connection() 
+        with connection.cursor() as cursor:
+            # cursor = connection.cursor()
+           
+            cursor.execute('''select format(ifnull(km.total,0) - ifnull(kk.total,0),0) current_amount from (select sum(total) total from (select (harga * jumlah) total from kas_masuk) km) km,
+(select sum(total) total from (select (harga * jumlah) total from kas_keluar) kk) kk ''')
+            cur = cursor.fetchall()[0]
+           
+        connection.close() 
+        return cur[0]
+    except Exception as e:
+        print(f"Error {e}")
+        
+		
