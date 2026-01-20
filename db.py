@@ -128,7 +128,7 @@ def tagihan_period_ess(nama):
         with connection.cursor() as cursor:
             # cursor = connection.cursor()
              
-            cursor.execute("SELECT  lt.nama,lt.grade,ab.periode,year(ab.period_start) tahun ,FORMAT(sum(ab.tagihan), 0) tagihan  FROM list_talent lt,absence ab where lt.id_talent = ab.id_talent and ab.period_start between lt.effective_start_date and lt.effective_end_date  and lt.id_talent = %s   group by lt.nama,lt.grade,ab.periode,year(ab.period_start) order by year(ab.period_start) , ab.periode " ,(nama,))
+            cursor.execute("SELECT lt.nama, lt.grade, ab.periode, YEAR(ab.period_start) tahun, FORMAT(SUM(ab.tagihan), 0) tagihan FROM list_talent lt, absence ab WHERE lt.id_talent = ab.id_talent AND ab.period_start BETWEEN lt.effective_start_date AND lt.effective_end_date AND lt.id_talent = %s GROUP BY lt.nama, lt.grade, ab.periode, YEAR(ab.period_start) ORDER BY YEAR(ab.period_start), CASE ab.periode WHEN 'Januari' THEN 1 WHEN 'Februari' THEN 2 WHEN 'Maret' THEN 3 WHEN 'April' THEN 4 WHEN 'Mei' THEN 5 WHEN 'Juni' THEN 6 WHEN 'Juli' THEN 7 WHEN 'Agustus' THEN 8 WHEN 'September' THEN 9 WHEN 'Oktober' THEN 10 WHEN 'November' THEN 11 WHEN 'Desember' THEN 12 END ASC " ,(nama,))
             
             grade = cursor.fetchall()
         
