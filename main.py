@@ -36,13 +36,10 @@ def main():
 
   st.header("Marching Band Dunia Fantasi")
   st.image("stufan.jpg",caption="Stufan Dcorps")
-  st.markdown('''▫️Info Rekening Bank DKI
+  st.markdown('''▫️Info Rekening 
 
-  20723090979
-  Santika Nurkhalipah
-
-  53420012655
-  Niken Kusuma Ramda
+  901187472664
+  Julie Abel Saifina Supriadi
   ''')
   with st.form(key="cek"):
     
